@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
     return [
-        //
+        'cat_name' => $faker->word,
+        'created_at' => now(),
+        'updated_at' => now()
     ];
 });
