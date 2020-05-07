@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-    //
+    public function user(){
+        $this->belongsTo('App\User');
+    }
+
+    public function category(){
+        $this->belongsTo('App\Category');
+    }
 }
