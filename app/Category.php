@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    //
+
+
+    public function jobs(){
+        $this->hasMany('App\Job');
+    }
 }

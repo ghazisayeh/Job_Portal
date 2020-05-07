@@ -23,8 +23,8 @@ class CreateJobsTable extends Migration
             $table->string('j_discription');
             $table->string('j_location');
             $table->boolean('j_active');
-            $table->foreign('j_owner')->references('er_id')->on('employers');
-            $table->foreign('j_category')->references('cat_id')->on('categories');
+            $table->foreign('j_owner')->references('id')->on('employers');
+            $table->foreign('j_category')->references('id')->on('categories');
             $table->timestamps();
         });
     }
