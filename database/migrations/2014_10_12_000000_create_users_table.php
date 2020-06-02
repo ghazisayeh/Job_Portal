@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('ee_current_location');
             $table->integer('ee_annual_salary');
             $table->string('ee_pic');
-            $table->string('ee_password');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
