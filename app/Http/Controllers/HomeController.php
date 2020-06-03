@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Job;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $jobs = DB::table('jobs')->join('employers','employers.id' ,"=" ,'jobs.j_owner')->get();
+        return view('home',compact('jobs'));
+
     }
+
+
 }
