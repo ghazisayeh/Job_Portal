@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('joblist', 'JobController@index')->name('JobList')->middleware('auth');
+Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
 
 Route::get('/registerindex', 'RegisterIndex@index');

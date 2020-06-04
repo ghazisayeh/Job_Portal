@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Job;
+use App\Category;
+use App\Employer;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -14,7 +17,21 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $howMany = Job::count();
+        $jobs = DB::table('jobs')
+        ->join('employers','employers.id' ,"=" ,'jobs.j_owner')
+        ->join('categories' ,'categories.id',"=" , 'jobs.j_category')
+        ->get();
+        return view('Jobs.joblist',compact('jobs','howMany'));
+    }
+
+    public function jobDetails($id){
+        $details = Job::find($id);
+        $jobCategory = $details->j_category;
+        $jobOwner = $details->j_owner;
+        $categoryDetails = Category::find($jobCategory);
+        $ownerDetails = Employer::find($jobOwner);
+        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
     }
 
     /**
