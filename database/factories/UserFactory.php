@@ -18,17 +18,18 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'ee_fn' => $faker->name,
-        'ee_ln' =>$faker->lastName,
+        'fn' => $faker->name,
+        'ln' =>$faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-        'ee_adresse' => $faker->address,
-        'ee_phno' => $faker->phoneNumber,
-        'ee_current_location' => $faker->address,
-        'ee_annual_salary' => $faker->numberBetween($min = 1000, $max = 9000),
-        'ee_pic' => 'https://picsum.photos/200',
+        'adresse' => $faker->address,
+        'phno' => $faker->phoneNumber,
+        'current_location' => $faker->address,
+        'annual_salary' => $faker->numberBetween($min = 1000, $max = 9000),
+        'pic' => 'https://picsum.photos/200',
+        'type' => $faker->numberBetween($min = 1, $max = 2),
         
     ];
 });

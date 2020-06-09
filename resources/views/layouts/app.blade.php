@@ -53,7 +53,7 @@
                             <div class="col-xs-7 col-sm-6 col-lg-8">
                                 <!-- Logo -->
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset ('assets/img/logo/logo.png')}}" alt=""></a>
+                                    <a href="/"><img src="{{ asset ('assets/img/logo/logo.png')}}" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xs-5 col-sm-6 col-lg-4">
@@ -80,7 +80,7 @@
                             <div class="col-xs-7 col-sm-6 col-lg-10">
                                 <!-- Logo -->
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset ('assets/img/logo/logo.png')}}" alt=""></a>
+                                    <a href="/"><img src="{{ asset ('assets/img/logo/logo.png')}}" alt=""></a>
                                 </div>
                             </div>
 
@@ -88,10 +88,10 @@
 
                                 <div class="dropdown">
                                     <button class="genric-btn primary circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {{auth()->user()->ee_fn}}
+                                      {{auth()->user()->fn}} {{auth()->user()->ln}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Jobs you apply</a>
+                                      <a class="dropdown-item" href="joblist">Jobs you apply</a>
                                       <a class="dropdown-item" href="#">Favorite</a>
                                       <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

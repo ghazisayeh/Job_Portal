@@ -13,7 +13,7 @@
                             <div class="col-xl-6 col-lg-9 col-md-10">
                                 <div class="hero__caption">
                                     <h1>Find the most exciting startup jobs</h1>
-                                    <a href="#" class="btn head-btn2">Find Job</a>
+                                    <a href="joblist" class="btn head-btn2">Find Job</a>
 
                                 </div>
                             </div>

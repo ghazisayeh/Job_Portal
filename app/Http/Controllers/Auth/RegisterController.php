@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -46,19 +47,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'ee_fn' => ['required', 'string', 'max:255'],
-            'ee_ln' => ['required', 'string', 'max:255'],
+            'fn' => ['required', 'string', 'max:255'],
+            'ln' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'ee_adresse' => ['required', 'string', 'max:255'],
-            'ee_phno' => ['required', 'string', 'max:255'],
-            'ee_current_location' => ['required', 'string', 'max:255'],
-            'ee_annual_salary' => ['required', 'string', 'max:255'],
-            'ee_pic' => ['required', 'string', 'max:255'],
+            'adresse' => ['required', 'string', 'max:255'],
+            'phno' => ['required', 'string', 'max:255'],
+            'current_location' => ['required', 'string', 'max:255'],
+            'annual_salary' => ['required', 'string', 'max:255'],
+            'pic' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'type' => ['required', 'string', 'max:255'],
+            ]);
     }
 
     /**
@@ -69,16 +73,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       
         return User::create([
-            'ee_fn' => $data['ee_fn'],
-            'ee_ln' => $data['ee_ln'],
+            'fn' => $data['fn'],
+            'ln' => $data['ln'],
             'email' => $data['email'],
-            'ee_adresse' => $data['ee_adresse'],
-            'ee_phno' => $data['ee_phno'],
-            'ee_current_location' => $data['ee_current_location'],
-            'ee_annual_salary' => $data['ee_annual_salary'],
-            'ee_pic' => $data['ee_pic'],
+            'adresse' => $data['adresse'],
+            'phno' => $data['phno'],
+            'current_location' => $data['current_location'],
+            'annual_salary' => $data['annual_salary'],
+            'pic' => $data['pic'],
             'password' => Hash::make($data['password']),
+            'type' => $data['type'],
         ]);
     }
 }
