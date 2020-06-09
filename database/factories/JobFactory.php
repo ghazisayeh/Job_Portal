@@ -4,14 +4,14 @@
 
 use App\Job;
 use App\Category;
-use App\Employer;
+use App\Company;
 use Faker\Generator as Faker;
 
 $factory->define(Job::class, function (Faker $faker) {
     return [
         //'user_id' => $factory->create(App\User::class)->id,
-        'j_category' => Category::get('id')->random(),
-        'j_owner' => Employer::get('id')->random(),
+        'id_cat' => Category::get('id')->random(),
+        'id_com' => Company::get('id')->random(),
         'j_title' => $faker->jobTitle,
         'j_hours' =>$faker->numberBetween($min = 6, $max = 8),
         'j_salary' =>$faker->numberBetween($min = 1000, $max = 9999),

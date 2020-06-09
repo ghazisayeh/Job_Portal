@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use App\Job;
-use App\Category;
-use App\Company;
+use App\Apply;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class ApplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,21 +14,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $howMany = Job::count();
-        $jobs = DB::table('jobs')
-        ->join('companies','companies.id' ,"=" ,'jobs.id_com')
-        ->join('categories' ,'categories.id',"=" , 'jobs.id_cat')
-        ->get();
-        return view('Jobs.joblist',compact('jobs','howMany'));
-    }
-
-    public function jobDetails($id){
-        $details = Job::find($id);
-        $jobCategory = $details->id_cat;
-        $jobCompany = $details->id_com;
-        $categoryDetails = Category::find($jobCategory);
-        $ownerDetails = Company::find($jobCompany);
-        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
+        //
     }
 
     /**
@@ -58,10 +41,10 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Job  $job
+     * @param  \App\Apply  $apply
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(Apply $apply)
     {
         //
     }
@@ -69,10 +52,10 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Job  $job
+     * @param  \App\Apply  $apply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit(Apply $apply)
     {
         //
     }
@@ -81,10 +64,10 @@ class JobController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Job  $job
+     * @param  \App\Apply  $apply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function update(Request $request, Apply $apply)
     {
         //
     }
@@ -92,10 +75,10 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Job  $job
+     * @param  \App\Apply  $apply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(Apply $apply)
     {
         //
     }

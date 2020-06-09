@@ -26,8 +26,8 @@
     <div class="container" style="padding-top: 20%;">
         <div class="shadow-lg p-3 mb-5 bg-white rounded">
             <div class="header-btn d-none d-lg-block">
-                <a href="/register" class="btn head-btn2">Employee</a>
-                <a href="#" class="btn head-btn2">Employer</a>
+                <a href="/register?id=1" class="btn head-btn2">Employee</a>
+                <a href="/register?id=2" class="btn head-btn2">Employer</a>
             </div>
         </div>  
     </div>
