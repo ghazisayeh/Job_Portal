@@ -34,6 +34,14 @@ class JobController extends Controller
         return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
     }
 
+
+    public function filterData(Request $request){
+        return $request;
+    }
+    public function searchFilter(Request $request){
+        return $request;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
