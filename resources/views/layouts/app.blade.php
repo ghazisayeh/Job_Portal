@@ -88,7 +88,7 @@
 
                                 <div class="dropdown">
                                     <button class="genric-btn primary circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {{auth()->user()->fn}} {{auth()->user()->ln}}
+                                      {{auth()->user()->fn}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                       <a class="dropdown-item" href="joblist">Jobs you apply</a>

@@ -17,7 +17,7 @@ class CreateAppliesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_u')->unsigned();
             $table->bigInteger('id_j')->unsigned();
-            $table->string('text');
+            $table->text('text');
             $table->foreign('id_u')->references('id')->on('users');
             $table->foreign('id_j')->references('id')->on('jobs');
             $table->timestamps();
