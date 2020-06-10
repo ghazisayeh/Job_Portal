@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('joblist', 'JobController@index')->name('JobList')->middleware('auth');
+Route::post('filterData', 'JobController@filterData')->name('filterData')->middleware('auth');
+Route::post('searchFilter', 'JobController@searchFilter')->name('searchFilter')->middleware('auth');
 Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
 
 Route::get('/registerindex', 'RegisterIndex@index');
