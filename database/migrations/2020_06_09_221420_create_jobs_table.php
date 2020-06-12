@@ -18,11 +18,11 @@ class CreateJobsTable extends Migration
             $table->bigInteger('id_cat')->unsigned();
             $table->bigInteger('id_com')->unsigned();
             $table->string('j_title');
-            $table->double('j_hours',3,1);
-            $table->integer('j_salary');
+            $table->string('j_hours');
+            $table->string('j_salary');
             $table->string('j_discription');
             $table->string('j_location');
-            $table->boolean('j_active');
+            $table->string('j_active');
             $table->foreign('id_com')->references('id')->on('companies')->onDelete('cascade');;
             $table->foreign('id_cat')->references('id')->on('categories')->onDelete('cascade');;
             $table->timestamps();
