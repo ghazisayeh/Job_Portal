@@ -17,14 +17,16 @@ class CreateJobsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_cat')->unsigned();
             $table->bigInteger('id_com')->unsigned();
+            $table->bigInteger('id_owner')->unsigned();
             $table->string('j_title');
             $table->string('j_hours');
             $table->string('j_salary');
             $table->string('j_discription');
             $table->string('j_location');
             $table->string('j_active');
-            $table->foreign('id_com')->references('id')->on('companies')->onDelete('cascade');;
-            $table->foreign('id_cat')->references('id')->on('categories')->onDelete('cascade');;
+            $table->foreign('id_com')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('id_cat')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('id_owner')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

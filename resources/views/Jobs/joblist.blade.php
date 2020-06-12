@@ -99,15 +99,32 @@
                                             <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
-                                            <a href="{{ url('jobDetails', $job->id) }}">
-                                            <h4>{{$job->j_title}}
-                                            </a>
+                                                <div class="row">
+                                                    <div class="">
+                                                        <a href="{{ url('jobDetails', $job->id) }}"><h4>{{$job->j_title}}</a>
+                                                        </div>
+                                                </div>
+
                                             <ul>
                                             <li></li>
                                             <li><i class="fas fa-map-marker-alt"></i>{{$job->j_location}}</li>
                                             <li>$1000 - {{$job->j_salary}}</li>
                                             </ul>
                                         </div>
+                                        @if (auth()->user()->id == $job->id_owner)
+                                        <div class="f-right mr-5">
+                                            <a href="{{ url ('jobDestroy', $job->id) }}"><i class="fas fa-trash-alt text-danger"></i></a>
+                                        </div>
+                                        <div class="f-right">
+                                            <a href="{{ route('jobs.edit', $job->id) }}"><i class="far fa-edit text-success"></i></a>
+                                        </div>
+                                        @endif
+
+                                        @if (auth()->user()->type == "1")
+                                            <div class="items-link items-link2 f-right">
+                                                <a href="#">Apply</a>
+                                            </div>
+                                        @endif
 
 
                                     </div>
