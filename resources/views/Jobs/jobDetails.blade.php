@@ -76,11 +76,10 @@
                           <li>Salary :  <span>${{$details->j_salary}} monthly</span></li>
                       </ul>
                                     <?php
-                                        if(auth()->user()->type == 1){
+                                        if(auth()->user()->type == "1"){
                                     ?>
                                     <div class="apply-btn2">
                                         <a class="btn" href="#">Apply Now</a>
-                                        <span>7 hours ago</span>
                                     </div>
                                     <?php
                                         }else{

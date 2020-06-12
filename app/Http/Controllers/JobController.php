@@ -19,9 +19,8 @@ class JobController extends Controller
     {
         $howMany = Job::count();
 
-        $jobs = DB::table('jobs')->select('id','id_cat','id_com','j_title','j_hours','j_salary',
+        $jobs = DB::table('jobs')->select('id','id_cat','id_owner','id_com','j_title','j_hours','j_salary',
         'j_discription','j_location','j_active')->get();
-
         return view('Jobs.joblist',compact('jobs','howMany'));
     }
 
@@ -39,9 +38,11 @@ class JobController extends Controller
         return $request;
     }
     public function searchFilter(Request $request){
-        return $request;
-    }
+        $output="";
+        $job = DB::table('jobs')->where('j_title','LIKE','%'.$request->searchfilter."%")->get();
+        return $job;
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -141,9 +142,10 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy($id)
     {
-        $job->delete();
+        $todelete = Job::find($id);
+        $todelete->delete();
 
         return redirect()->route('jobs.index');
     }

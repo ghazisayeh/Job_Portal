@@ -40,4 +40,7 @@ class User extends Authenticatable
     public function apply(){
         $this->hasMany('App\Apply');
     }
+    public function job(){
+        $this->hasMany('App\Job');
+    }
 }
