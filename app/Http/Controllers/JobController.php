@@ -27,6 +27,7 @@ class JobController extends Controller
 
     public function jobDetails($id){
         $details = Job::find($id);
+        dd($details);
         $jobCategory = $details->id_cat;
         $jobCompany = $details->id_com;
         $categoryDetails = Category::find($jobCategory);
@@ -82,7 +83,7 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+        return view('jobs.edit', compact('job'));
     }
 
     /**
@@ -94,7 +95,9 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        $validatedData = $request->validate($this->validationRules());
+        $job->update($validatedData);
+        return redirect()->route('JobList');
     }
 
     /**
@@ -105,6 +108,20 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+        $job->delete();
+
+        return redirect()->route('JobList');
+    }
+
+    private function validationRules()
+    {
+        return [
+            'j_title' => ['required', 'string', 'max:255'],
+            'j_hours' => ['required'],
+            'j_salary' => ['required'],
+            'j_description' => ['required', 'string', 'max:255'],
+            'j_location' => ['required', 'string', 'max:255'],
+            'j_active' => ['required']
+        ];
     }
 }
