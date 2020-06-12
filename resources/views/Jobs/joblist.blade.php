@@ -111,28 +111,7 @@
 
 
                                     </div>
-                                    <?php
-                                        if(auth()->user()->type == 1){
-                                    ?>
-                                    <div class="items-link items-link2 f-right">
-                                        <a href="job_details.html">apply</a>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                    <?php
-                                        }else{
-                                    ?>
-                                    <div class="items-link items-link2 f-right">
-                                        <a href="{{ route('jobs.edit', $job->id) }}">Edit</a>
-                                        <a href="#" onclick="event.preventDefault(); document.querySelector('#delete-job-form').submit();">Delete</a>
-                                        <form id="delete-job-form" action="{{ route('jobs.destroy', $job->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
+
                                 </div>
                                 @endforeach
                             </div>

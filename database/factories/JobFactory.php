@@ -20,7 +20,7 @@ $factory->define(Job::class, function (Faker $faker) {
         'j_active' => $faker->boolean ,
         'created_at' => now(),
         'updated_at' => now()
-        
-    
+
+
     ];
 });
