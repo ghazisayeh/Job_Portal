@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,3 +22,4 @@ Route::get('joblist', 'JobController@index')->name('JobList')->middleware('auth'
 Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
 
 Route::get('/registerindex', 'RegisterIndex@index');
+Route::resource('/jobs','JobController');
