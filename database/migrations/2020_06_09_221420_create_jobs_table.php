@@ -23,8 +23,8 @@ class CreateJobsTable extends Migration
             $table->string('j_discription');
             $table->string('j_location');
             $table->boolean('j_active');
-            $table->foreign('id_com')->references('id')->on('companies');
-            $table->foreign('id_cat')->references('id')->on('categories');
+            $table->foreign('id_com')->references('id')->on('companies')->onDelete('cascade');;
+            $table->foreign('id_cat')->references('id')->on('categories')->onDelete('cascade');;
             $table->timestamps();
         });
     }

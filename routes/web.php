@@ -24,3 +24,4 @@ Route::post('searchFilter', 'JobController@searchFilter')->name('searchFilter')-
 Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
 
 Route::get('/registerindex', 'RegisterIndex@index');
+Route::resource('jobs', 'JobController');

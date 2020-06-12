@@ -18,8 +18,8 @@ class CreateAppliesTable extends Migration
             $table->bigInteger('id_u')->unsigned();
             $table->bigInteger('id_j')->unsigned();
             $table->text('text');
-            $table->foreign('id_u')->references('id')->on('users');
-            $table->foreign('id_j')->references('id')->on('jobs');
+            $table->foreign('id_u')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('id_j')->references('id')->on('jobs')->onDelete('cascade');;
             $table->timestamps();
         });
     }

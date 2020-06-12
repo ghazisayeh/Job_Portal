@@ -18,16 +18,15 @@ class JobController extends Controller
     public function index()
     {
         $howMany = Job::count();
-        $jobs = DB::table('jobs')
-        ->join('companies','companies.id' ,"=" ,'jobs.id_com')
-        ->join('categories' ,'categories.id',"=" , 'jobs.id_cat')
-        ->get();
+
+        $jobs = DB::table('jobs')->select('id','id_cat','id_com','j_title','j_hours','j_salary',
+        'j_discription','j_location','j_active')->get();
+
         return view('Jobs.joblist',compact('jobs','howMany'));
     }
 
     public function jobDetails($id){
         $details = Job::find($id);
-        dd($details);
         $jobCategory = $details->id_cat;
         $jobCompany = $details->id_com;
         $categoryDetails = Category::find($jobCategory);
@@ -61,7 +60,28 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validationRules());
+
+        $job = new Job;
+        $company = new Company;
+
+        $company->name = $request->name_com;
+        $company->location = $request->location_com;
+
+        $company->save();
+
+        $job->id_cat = Category::get('id')->random();
+        $job->id_com = $company->id;
+        $job->j_title = $request->j_title;
+        $job->j_hours = $request->j_hours;
+        $job->j_salary = $request->j_salary;
+        $job->j_discription = $request->j_discription;
+        $job->j_location = $request->j_location;
+        $job->j_active = 1;
+
+        $job->save();
+
+        return redirect()->route('jobs.joblist');
     }
 
     /**
@@ -72,7 +92,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        return view('jobs.show')->with('job', $job);
     }
 
     /**
@@ -97,7 +117,7 @@ class JobController extends Controller
     {
         $validatedData = $request->validate($this->validationRules());
         $job->update($validatedData);
-        return redirect()->route('JobList');
+        return redirect()->route('jobs.show', $job->id);
     }
 
     /**
@@ -110,7 +130,7 @@ class JobController extends Controller
     {
         $job->delete();
 
-        return redirect()->route('JobList');
+        return redirect()->route('jobs.index');
     }
 
     private function validationRules()
