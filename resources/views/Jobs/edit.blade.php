@@ -8,6 +8,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('jobs.update', $job->id) }}">
+
                         @csrf
                         @method('PATCH')
                         <div class="form-group row">

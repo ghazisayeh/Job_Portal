@@ -91,7 +91,7 @@
                                       {{auth()->user()->fn}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="joblist">Jobs you apply</a>
+                                      <a class="dropdown-item" href="/jobs">Jobs you apply</a>
                                       <a class="dropdown-item" href="#">Favorite</a>
                                       <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

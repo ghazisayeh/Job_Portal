@@ -91,7 +91,7 @@
                                 </div>
                                 @foreach ($jobs as $job)
                                 @php
-                                   dd($job);
+                                   //dd($jobs);
                                 @endphp
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
@@ -103,7 +103,7 @@
                                             <h4>{{$job->j_title}}
                                             </a>
                                             <ul>
-                                            <li>{{$job->cat_name}}</li>
+                                            <li></li>
                                             <li><i class="fas fa-map-marker-alt"></i>{{$job->j_location}}</li>
                                             <li>$1000 - {{$job->j_salary}}</li>
                                             </ul>
