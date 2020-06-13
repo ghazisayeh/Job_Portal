@@ -90,15 +90,28 @@
                                     <button class="genric-btn primary circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       {{auth()->user()->ln}}
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="/jobs">Jobs you apply</a>
-                                      <a class="dropdown-item" href="#">Favorite</a>
-                                      <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                       </a>
-                                    </div>
+                                    @if (auth()->user()->type == "2")
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{{ url('addJob') }}">add job</a>
+                                            <a class="dropdown-item" href="#">List of workers</a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                              onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                              {{ __('Logout') }}
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="">Jobs you apply</a>
+                                            <a class="dropdown-item" href="#">Favorite</a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                              onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                              {{ __('Logout') }}
+                                            </a>
+                                        </div>
+                                    @endif
+
                                   </div>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

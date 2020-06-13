@@ -61,28 +61,39 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validationRules());
 
         $job = new Job;
         $company = new Company;
+        $category = new Category;
 
-        $company->name = $request->name_com;
-        $company->location = $request->location_com;
+        $company->name = $request->name;
+        $company->location = $request->location;
+        $category->cat_name = $request->cat_name;
 
+        $category->save();
         $company->save();
 
-        $job->id_cat = Category::get('id')->random();
-        $job->id_com = $company->id;
+        $lastoneCompany =  DB::table('companies')->where('name','=',$request->name)->count();
+        $CompanyWhere = DB::table('companies')->where('name','=',$request->name)->get();
+        $CompnayID = $CompanyWhere[$lastoneCompany-1]->id;
+
+        $lastoneCategory = DB::table('categories')->where('cat_name','=',$request->cat_name)->count();
+        $categoryWhere = DB::table('categories')->where('cat_name','=',$request->cat_name)->get();
+        $categoryID = $categoryWhere[$lastoneCategory-1]->id;
+
+
+        $job->id_cat = $categoryID;
+        $job->id_com = $CompnayID;
+        $job->id_owner = $request->id_owner;
         $job->j_title = $request->j_title;
         $job->j_hours = $request->j_hours;
         $job->j_salary = $request->j_salary;
         $job->j_discription = $request->j_discription;
         $job->j_location = $request->j_location;
-        $job->j_active = 1;
-
+        $job->j_active = $request->j_active;
         $job->save();
 
-        return redirect()->route('jobs.joblist');
+        return view('Jobs.addJob');
     }
 
     /**
@@ -93,7 +104,8 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        return view('jobs.show')->with('job', $job);
+        return view('jobs.addJob');
+
     }
 
     /**
