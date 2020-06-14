@@ -75,29 +75,25 @@
                           <li>Job nature : <span>Full time</span></li>
                           <li>Salary :  <span>${{$details->j_salary}} monthly</span></li>
                       </ul>
-                                    <?php
-                                        if(auth()->user()->type == "1"){
-                                    ?>
-                                    <div class="apply-btn2">
-                                        <a class="btn" href="#">Apply Now</a>
-                                    </div>
-                                    <?php
-                                        }else{
-                                    ?>
-                                    <div class="row">
+                      @if (auth()->user()->id == $details->id_owner)
+                      <div class="row">
+                        <a href="{{ route('jobs.edit', $details->id) }}"><i class="far fa-edit text-success mr-5 ml-5" style='font-size:48px;color:green'></i></a>
+                        <a href="#"
+                        onclick="event.preventDefault();
+                        document.querySelector('#delete-job-form').submit();"> <i class='fas fa-trash-alt ml-5' style='font-size:48px;color:red'></i> </a>
+                        <form id="delete-job-form" action="{{ route('jobs.destroy', $details->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </div>
+                    @else
+                    <div class="apply-btn2">
+                        <a class="btn" href="#">Apply Now</a>
+                    </div>
+                      @endif
 
-                                        <a href="{{ route('jobs.edit', $details->id) }}"><i class="far fa-edit text-success mr-5 ml-5" style='font-size:48px;color:green'></i></a>
-                                        <a href="#"
-                                        onclick="event.preventDefault();
-                                        document.querySelector('#delete-job-form').submit();"> <i class='fas fa-trash-alt ml-5' style='font-size:48px;color:red'></i> </a>
-                                        <form id="delete-job-form" action="{{ route('jobs.destroy', $details->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
+
+
 
                    </div>
                     <div class="post-details4  mb-50">
