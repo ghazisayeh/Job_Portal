@@ -84,16 +84,16 @@
                                     <?php
                                         }else{
                                     ?>
-                                    <div class="apply-btn2">
-                                        <a class="btn" href="{{ route('jobs.edit', $details->id) }}">Edit</a>
-                                        <a class="btn" type="button"
+                                    <div class="row">
+
+                                        <a href="{{ route('jobs.edit', $details->id) }}"><i class="far fa-edit text-success mr-5 ml-5" style='font-size:48px;color:green'></i></a>
+                                        <a href="#"
                                         onclick="event.preventDefault();
-                                        document.querySelector('#delete-job-form').submit();">Delete</a>
+                                        document.querySelector('#delete-job-form').submit();"> <i class='fas fa-trash-alt ml-5' style='font-size:48px;color:red'></i> </a>
                                         <form id="delete-job-form" action="{{ route('jobs.destroy', $details->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
-                                        <br><span>7 hours ago</span>
                                     </div>
                                     <?php
                                         }

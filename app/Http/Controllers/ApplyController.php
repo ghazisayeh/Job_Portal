@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Apply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApplyController extends Controller
 {
@@ -12,9 +14,29 @@ class ApplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $ownerId = Auth::user()->id;
+        $data = DB::table('jobs')
+        ->join('categories' ,'categories.id', 'jobs.id_cat' )
+        ->select('jobs.id','jobs.j_title','jobs.j_hours','jobs.j_salary','j_active','categories.cat_name')
+        ->where('id_owner','=',$ownerId)->get();
+
+
+        $data2 = DB::table('applies')
+        ->join('jobs' , 'jobs.id', '=' ,'applies.id_j')
+        ->join('users' ,'users.id' , "=", 'applies.id_u')
+        ->select('jobs.j_title','jobs.j_salary' , 'jobs.j_hours' , 'users.email' , 'applies.text' , 'applies.id')
+        ->where('jobs.id_owner','=',$ownerId)->get();
+
+
+        return view('Apply.apply',compact('data','data2'));
+    }
+
+
+    public function notification(){
+
     }
 
     /**
@@ -46,7 +68,7 @@ class ApplyController extends Controller
      */
     public function show(Apply $apply)
     {
-        //
+
     }
 
     /**
@@ -80,6 +102,7 @@ class ApplyController extends Controller
      */
     public function destroy(Apply $apply)
     {
-        //
+        $apply->delete();
+        return redirect()->route('Apply.index');
     }
 }

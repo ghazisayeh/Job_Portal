@@ -21,10 +21,9 @@ Auth::routes();
 Route::get('joblist', 'JobController@index')->name('JobList')->middleware('auth');
 Route::post('filterData', 'JobController@filterData')->name('filterData')->middleware('auth');
 Route::post('searchFilter', 'JobController@searchFilter')->name('searchFilter')->middleware('auth');
-Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
-Route::get('jobDestroy/{id}', 'JobController@destroy')->middleware('auth');
 Route::get('addJob', 'JobController@show')->middleware('auth');
 
 
 Route::get('/registerindex', 'RegisterIndex@index');
+Route::resource('Apply', 'ApplyController');
 Route::resource('jobs', 'JobController');
