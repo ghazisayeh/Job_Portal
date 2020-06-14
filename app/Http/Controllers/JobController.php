@@ -24,6 +24,14 @@ class JobController extends Controller
         return view('Jobs.joblist',compact('jobs','howMany'));
     }
 
+    public function jobDetails($id){
+        $details = Job::find($id);
+        $jobCategory = $details->id_cat;
+        $jobCompany = $details->id_com;
+        $categoryDetails = Category::find($jobCategory);
+        $ownerDetails = Company::find($jobCompany);
+        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
+    }
 
 
     public function filterData(Request $request){
@@ -32,8 +40,7 @@ class JobController extends Controller
     public function searchFilter(Request $request){
         $output="";
         $job = DB::table('jobs')->where('j_title','LIKE','%'.$request->searchfilter."%")->get();
-        return Response($job);
-
+        return $job;
 
     }
     /**
@@ -43,7 +50,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('Jobs.addJob');
+
     }
 
     /**
@@ -86,7 +93,7 @@ class JobController extends Controller
         $job->j_active = $request->j_active;
         $job->save();
 
-        return view('Jobs.addJob');
+        return redirect()->route('jobs.index');
     }
 
     /**
@@ -97,12 +104,8 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        $details = Job::find($job->id);
-        $jobCategory = $details->id_cat;
-        $jobCompany = $details->id_com;
-        $categoryDetails = Category::find($jobCategory);
-        $ownerDetails = Company::find($jobCompany);
-        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
+        return view('jobs.addJob');
+
     }
 
     /**
@@ -151,9 +154,11 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy($id)
     {
-        $job->delete();
+        $todelete = Job::find($id);
+        $todelete->delete();
+
         return redirect()->route('jobs.index');
     }
 

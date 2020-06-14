@@ -103,7 +103,7 @@
                                         <div class="job-tittle job-tittle2" >
                                                 <div class="row">
                                                     <div class="">
-                                                        <a href="{{ route('jobs.show', $job->id) }}"><h4>{{$job->j_title}}</a>
+                                                        <a href="{{ url('jobDetails', $job->id) }}"><h4>{{$job->j_title}}</a>
                                                     </div>
                                                 </div>
 
@@ -113,21 +113,22 @@
                                             <li>$1000 - {{$job->j_salary}}</li>
                                             </ul>
                                         </div>
-                                        @if (auth()->user()->id == $job->id_owner)
-
-                                        <div class="f-right">
-                                            <a href="{{ route('jobs.edit', $job->id) }}"><i class="far fa-edit text-success"></i></a>
-                                        </div>
-                                        @endif
-
-                                        @if (auth()->user()->type == "1")
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="#">Apply</a>
-                                            </div>
-                                        @endif
 
 
                                     </div>
+                                    @if (auth()->user()->id == $job->id_owner)
+
+                                    <div class="f-right">
+                                        <a href="{{ route('jobs.edit', $job->id) }}"><i class="far fa-edit text-success"></i></a>
+                                        <a href="{{ url ('jobDestroy', $job->id) }}"><i class="fas fa-trash-alt text-danger ml-5"></i></a>
+                                    </div>
+                                    @endif
+
+                                    @if (auth()->user()->type == "1")
+                                        <div class="items-link items-link2 f-right">
+                                            <a href="/sentapply?id={{ $job->id }}">Apply</a>
+                                        </div>
+                                    @endif
 
                                 </div>
                                 @endforeach
