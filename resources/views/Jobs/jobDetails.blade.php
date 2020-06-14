@@ -86,11 +86,12 @@
                             @method('DELETE')
                         </form>
                     </div>
-                    @else
+                    @endif
+                    @if (auth()->user()->type == 1)
                     <div class="apply-btn2">
                         <a class="btn" href="#">Apply Now</a>
                     </div>
-                      @endif
+                    @endif
 
 
 

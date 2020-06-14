@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Apply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 
 class ApplyController extends Controller
@@ -17,7 +18,7 @@ class ApplyController extends Controller
 
     public function index()
     {
-        $ownerId = Auth::user()->id;
+        $ownerId = auth()->user()->id;
         $data = DB::table('jobs')
         ->join('categories' ,'categories.id', 'jobs.id_cat' )
         ->select('jobs.id','jobs.j_title','jobs.j_hours','jobs.j_salary','j_active','categories.cat_name')
@@ -46,7 +47,7 @@ class ApplyController extends Controller
      */
     public function create()
     {
-        //
+        return view('Apply.sentapply',);
     }
 
     /**
@@ -57,7 +58,15 @@ class ApplyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $apply = new Apply;
+
+        $apply->text = $request->txt;
+        $apply->id_u = auth()->user()->id;
+        $apply->id_j = $request->id_j;
+
+        $apply->save();
+
+        return redirect()->route('jobs.index');
     }
 
     /**
