@@ -24,14 +24,6 @@ class JobController extends Controller
         return view('Jobs.joblist',compact('jobs','howMany'));
     }
 
-    public function jobDetails($id){
-        $details = Job::find($id);
-        $jobCategory = $details->id_cat;
-        $jobCompany = $details->id_com;
-        $categoryDetails = Category::find($jobCategory);
-        $ownerDetails = Company::find($jobCompany);
-        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
-    }
 
 
     public function filterData(Request $request){
@@ -40,7 +32,8 @@ class JobController extends Controller
     public function searchFilter(Request $request){
         $output="";
         $job = DB::table('jobs')->where('j_title','LIKE','%'.$request->searchfilter."%")->get();
-        return $job;
+        return Response($job);
+
 
     }
     /**
@@ -50,7 +43,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return view('Jobs.addJob');
     }
 
     /**
@@ -104,8 +97,12 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        return view('jobs.addJob');
-
+        $details = Job::find($job->id);
+        $jobCategory = $details->id_cat;
+        $jobCompany = $details->id_com;
+        $categoryDetails = Category::find($jobCategory);
+        $ownerDetails = Company::find($jobCompany);
+        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
     }
 
     /**
@@ -154,11 +151,9 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        $todelete = Job::find($id);
-        $todelete->delete();
-
+        $job->delete();
         return redirect()->route('jobs.index');
     }
 

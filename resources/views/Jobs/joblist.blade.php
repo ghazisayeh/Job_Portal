@@ -89,20 +89,22 @@
 
 
                                 </div>
+                            <div id="alljobs">
+
+
+
                                 @foreach ($jobs as $job)
                                 @php
                                    //dd($jobs);
                                 @endphp
-                                <div class="single-job-items mb-30">
+                                <div class="single-job-items mb-30"  >
                                     <div class="job-items">
-                                        <div class="company-img">
-                                            <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
-                                        </div>
-                                        <div class="job-tittle job-tittle2">
+
+                                        <div class="job-tittle job-tittle2" >
                                                 <div class="row">
                                                     <div class="">
-                                                        <a href="{{ url('jobDetails', $job->id) }}"><h4>{{$job->j_title}}</a>
-                                                        </div>
+                                                        <a href="{{ route('jobs.show', $job->id) }}"><h4>{{$job->j_title}}</a>
+                                                    </div>
                                                 </div>
 
                                             <ul>
@@ -112,9 +114,7 @@
                                             </ul>
                                         </div>
                                         @if (auth()->user()->id == $job->id_owner)
-                                        <div class="f-right mr-5">
-                                            <a href="{{ url ('jobDestroy', $job->id) }}"><i class="fas fa-trash-alt text-danger"></i></a>
-                                        </div>
+
                                         <div class="f-right">
                                             <a href="{{ route('jobs.edit', $job->id) }}"><i class="far fa-edit text-success"></i></a>
                                         </div>
@@ -131,6 +131,7 @@
 
                                 </div>
                                 @endforeach
+                            </div>
                             </div>
                         </section>
                         <!-- Featured_job_end -->
@@ -302,6 +303,7 @@
                 data:search_data.serialize(),
                 success:function(Response){
                     console.log(Response);
+                    $('#alljobs').empty();
                 }
             });
             e.preventDefault();

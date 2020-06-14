@@ -92,8 +92,8 @@
                                     </button>
                                     @if (auth()->user()->type == "2")
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="{{ url('addJob') }}">add job</a>
-                                            <a class="dropdown-item" href="#">List of workers</a>
+                                            <a class="dropdown-item" href="{{ route('jobs.create') }}">add job</a>
+                                        <a class="dropdown-item" href="{{route('Apply.index')}}">List of workers</a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                               onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();">
