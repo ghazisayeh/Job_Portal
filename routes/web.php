@@ -23,10 +23,14 @@ Route::post('filterData', 'JobController@filterData')->name('filterData')->middl
 Route::post('searchFilter', 'JobController@searchFilter')->name('searchFilter')->middleware('auth');
 Route::get('jobDetails/{id}', 'JobController@jobDetails')->middleware('auth');
 Route::get('jobDestroy/{id}', 'JobController@destroy')->middleware('auth');
+Route::get('sendNofication/{id}', 'ApplyController@sendNofication')->name('sendNofication')->middleware('auth');
+Route::get('clearNotificaton', 'NotificationController@clearNotificaton')->name('clearNotificaton')->middleware('auth');
 Route::get('addJob', 'JobController@show')->middleware('auth');
+
 
 
 Route::get('/registerindex', 'RegisterIndex@index');
 Route::resource('Apply', 'ApplyController');
 Route::resource('jobs', 'JobController');
+Route::resource('notification', 'NotificationController');
 Route::get('/sentapply', 'ApplyController@create')->middleware('auth');

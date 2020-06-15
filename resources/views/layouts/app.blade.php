@@ -88,10 +88,11 @@
 
                                 <div class="dropdown">
                                     <button class="genric-btn primary circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{auth()->user()->fn}} {{auth()->user()->ln}}
+                                    {{auth()->user()->ln}}
                                     </button>
                                     @if (auth()->user()->type == "2")
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{{ route('jobs.index')}}">Job List</a>
                                             <a class="dropdown-item" href="{{ route('jobs.show', auth()->user()->id) }}">add job</a>
                                         <a class="dropdown-item" href="{{route('Apply.index')}}">List of workers</a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -102,8 +103,8 @@
                                         </div>
                                     @else
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="">Jobs you apply</a>
-                                            <a class="dropdown-item" href="#">Favorite</a>
+                                        <a class="dropdown-item" href="{{ route('jobs.index')}}">Job List</a>
+                                            <a class="dropdown-item" href="{{ route('notification.index')}}">Notification</a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                               onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();">

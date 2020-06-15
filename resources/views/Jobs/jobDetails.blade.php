@@ -11,7 +11,7 @@
                     <div class="single-job-items mb-50">
                         <div class="job-items">
                             <div class="company-img company-img-details">
-                            <a href="#"><img src="{{$ownerDetails->er_pic}}" alt=""></a>
+                            <a href="#"><img src="{{$userDetails->pic}}" alt=""></a>
                             </div>
                             <div class="job-tittle">
                                 <h4 class="mt-5">{{$details->j_title}}</h4>
@@ -102,12 +102,10 @@
                        <div class="small-section-tittle">
                            <h4>Company Information</h4>
                        </div>
-                    <span>{{$ownerDetails->er_company}}</span>
-                          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    <span>{{$ownerDetails->name}}</span>
                         <ul>
-                            <li>Name: <span>{{$ownerDetails->er_company}} </span></li>
-                            <li>Phone : <span> {{$ownerDetails->er_phno}}</span></li>
-                            <li>Email: <span>{{$ownerDetails->email}}</span></li>
+                            <li>Location : <span> {{$ownerDetails->location}}</span></li>
+                            <li>Email : <span> {{$userDetails->email}}</span></li>
                         </ul>
                    </div>
                 </div>

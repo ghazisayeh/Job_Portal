@@ -12,7 +12,7 @@ class AppliesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Apply::class, 5)->create();
+        factory(Apply::class, 20)->create();
 
     }
 }
