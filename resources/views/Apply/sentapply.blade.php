@@ -18,7 +18,7 @@
                             <label for="txt" class="col-md-4 col-form-label text-md-right">{{ __('Talk about your self') }}</label>
 
                             <div class="col-md-6">
-                                <input id="txt" type="text" class="form-control @error('txt') is-invalid @enderror" name="txt" value="{{ old('txt') }}" required autocomplete="txt">
+                                <textarea id="txt" type="text" rows="7" class="form-control @error('txt') is-invalid @enderror" name="txt" value="{{ old('txt') }}" required autocomplete="txt"></textarea>
 
                                 @error('txt')
                                     <span class="invalid-feedback" role="alert">

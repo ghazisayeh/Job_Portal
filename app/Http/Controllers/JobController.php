@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Job;
+use App\User;
 use App\Category;
 use App\Company;
 use Illuminate\Http\Request;
@@ -19,8 +20,10 @@ class JobController extends Controller
     {
         $howMany = Job::count();
 
-        $jobs = DB::table('jobs')->select('id','id_cat','id_owner','id_com','j_title','j_hours','j_salary',
-        'j_discription','j_location','j_active')->get();
+        $jobs = DB::table('jobs')
+        ->join('users' , 'users.id', '='  , 'jobs.id_owner')
+        ->select('jobs.id','jobs.id_cat','jobs.id_owner','jobs.id_com','jobs.j_title','jobs.j_hours','jobs.j_salary',
+        'jobs.j_discription','jobs.j_location','jobs.j_active' , 'users.pic')->get();
         return view('Jobs.joblist',compact('jobs','howMany'));
     }
 
@@ -28,9 +31,11 @@ class JobController extends Controller
         $details = Job::find($id);
         $jobCategory = $details->id_cat;
         $jobCompany = $details->id_com;
+        $userWhoPost = $details->id_owner;
+        $userDetails = User::find($userWhoPost);
         $categoryDetails = Category::find($jobCategory);
         $ownerDetails = Company::find($jobCompany);
-        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails'));
+        return view('Jobs.jobDetails',compact('details','categoryDetails','ownerDetails','userDetails'));
     }
 
 
@@ -93,7 +98,7 @@ class JobController extends Controller
         $job->j_active = $request->j_active;
         $job->save();
 
-        return redirect()->route('jobs.index');
+        return redirect()->route('Apply.index')->with('jobadded','Job seccessfully added ! ');
     }
 
     /**
@@ -145,7 +150,7 @@ class JobController extends Controller
         $job->j_active = $input['j_active'];
 
         $job->save();
-        return redirect()->route('jobs.index');
+        return redirect()->route('Apply.index')->with('updateJob' , 'Job successfully Updated');
     }
 
     /**
@@ -159,7 +164,7 @@ class JobController extends Controller
         $todelete = Job::find($id);
         $todelete->delete();
 
-        return redirect()->route('jobs.index');
+        return redirect()->route('Apply.index')->with('deleteJob' , 'Job successfully Deleted');
     }
 
     private function validationRules()

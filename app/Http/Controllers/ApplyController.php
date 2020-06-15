@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Apply;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class ApplyController extends Controller
         $data2 = DB::table('applies')
         ->join('jobs' , 'jobs.id', '=' ,'applies.id_j')
         ->join('users' ,'users.id' , "=", 'applies.id_u')
-        ->select('jobs.j_title','jobs.j_salary' , 'jobs.j_hours' , 'users.email' , 'applies.text' , 'applies.id')
+        ->select('jobs.j_title','jobs.j_salary' , 'jobs.j_hours' , 'users.email' , 'users.id' , 'applies.text' , 'applies.id as applyid')
         ->where('jobs.id_owner','=',$ownerId)->get();
 
 
@@ -36,9 +37,6 @@ class ApplyController extends Controller
     }
 
 
-    public function notification(){
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -112,6 +110,14 @@ class ApplyController extends Controller
     public function destroy(Apply $apply)
     {
         $apply->delete();
-        return redirect()->route('Apply.index');
+        return redirect()->route('Apply.index')->with('rejectApply' , 'apply has been rejected');
+    }
+
+    public function sendNofication($id){
+        $not = new Notification;
+        $not->id_user = $id;
+        $not->notificationcontent = 'Welcome to our Company';
+        $not->save();
+        return redirect()->route('Apply.index')->with('Notification' , 'Notification successfully Sent');
     }
 }

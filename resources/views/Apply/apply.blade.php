@@ -1,6 +1,27 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if (session('jobadded'))
+    <div class="alert alert-success">
+        {{ session('jobadded') }}
+    </div>
+    @elseif(session('updateJob'))
+    <div class="alert alert-success">
+        {{ session('updateJob') }}
+    </div>
+    @elseif(session('deleteJob'))
+    <div class="alert alert-success">
+        {{ session('deleteJob') }}
+    </div>
+    @elseif(session('rejectApply'))
+    <div class="alert alert-success">
+        {{ session('rejectApply') }}
+    </div>
+    @elseif(session('Notification'))
+    <div class="alert alert-success">
+        {{ session('Notification') }}
+    </div>
+    @endif
   <div class="weposted mb-5">
     <div class="row mt-4 mb-2">
         <div class="col-md-5 ml-5">
@@ -83,7 +104,7 @@
                 <td> {{$item->j_title}}</td>
                 <td> {{$item->text}}</td>
                 <td>
-                    <a href="{{ route('jobs.edit', $item->id) }}"> <i class="fas fa-check-circle" style='color:green'></i> </a>
+                    <a href="{{ route('sendNofication', $item->id) }}"> <i class="fas fa-check-circle" style='color:green'></i> </a>
 
                 </td>
                 <td>
@@ -92,7 +113,7 @@
                         document.querySelector('#reject-form').submit();"
                         >   <i class="fas fa-times-circle" style='color:red'></i>
                     </a>
-                    <form id="reject-form" action="{{ route('Apply.destroy', $item->id) }}" method="POST" style="display: none;">
+                    <form id="reject-form" action="{{ route('Apply.destroy', $item->applyid) }}" method="POST" style="display: none;">
                         @csrf
                         @method('DELETE')
                     </form>

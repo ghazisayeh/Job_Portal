@@ -91,15 +91,13 @@
                                 </div>
                             <div id="alljobs">
 
-
-
                                 @foreach ($jobs as $job)
-                                @php
-                                   //dd($jobs);
-                                @endphp
+                                @if ($job->j_active == "1")
                                 <div class="single-job-items mb-30"  >
                                     <div class="job-items">
-
+                                        <div class="company-img">
+                                        <a href="#"><img src="{{ $job->pic }}" alt="" style="height: 100px;width:100px;"></a>
+                                        </div>
                                         <div class="job-tittle job-tittle2" >
                                                 <div class="row">
                                                     <div class="">
@@ -131,6 +129,8 @@
                                     @endif
 
                                 </div>
+                                @endif
+
                                 @endforeach
                             </div>
                             </div>
